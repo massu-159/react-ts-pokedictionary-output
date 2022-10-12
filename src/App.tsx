@@ -6,10 +6,10 @@ import Navber from './components/Navber/Navber';
 
 function App() {
   const initialURL: string = "https://pokeapi.co/api/v2/pokemon";
-  const [loading, setLoading] = useState(true);
-  const [pokemonData, setPokemonData] = useState([]);
-  const [nextURL, setNextURL] = useState("");
-  const [prevURL, setPrevURL] = useState("");
+  const [loading, setLoading] = useState<boolean>(true);
+  const [pokemonData, setPokemonData] = useState<string[]>([]);
+  const [nextURL, setNextURL] = useState<string>("");
+  const [prevURL, setPrevURL] = useState<string>("");
 
   useEffect(() => {
     const fetchPokemonData = async () => {
@@ -24,7 +24,7 @@ function App() {
     fetchPokemonData();
   }, []);
 
-  const loadPokemon = async (data: Array<string>) => {
+  const loadPokemon = async (data: string[]) => {
     let _pokemonData:any = await Promise.all(
       data.map((pokemon:any) => {
         let pokemonRecord = getPokemon(pokemon.url);

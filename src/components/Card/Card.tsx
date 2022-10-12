@@ -1,7 +1,7 @@
 import React from 'react';
 import './Card.css';
 
-const Card = ({ pokemon }:any) => {
+const Card = ({ pokemon }:any):JSX.Element => {
   return (
     <div className='card'>
       <div className="cardImg">
