@@ -4,6 +4,15 @@ import Card from './components/Card/Card';
 import './App.css';
 import Navber from './components/Navber/Navber';
 
+interface Pokemon {
+  sprites: string;
+  name: string;
+  type: string;
+  weight: string;
+  height: string;
+  abilities: string;
+}
+
 function App() {
   const initialURL: string = "https://pokeapi.co/api/v2/pokemon";
   const [loading, setLoading] = useState<boolean>(true);
