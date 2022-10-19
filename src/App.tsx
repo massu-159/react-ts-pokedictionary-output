@@ -3,27 +3,24 @@ import { getAllPokemon, getPokemon } from './utils/pokemon';
 import Card from './components/Card/Card';
 import './App.css';
 import Navber from './components/Navber/Navber';
+import { Pokemon } from './interfaces/Pokemon';
+import { ApiUrl } from './interfaces/ApiUrl';
 
-interface Pokemon {
-  sprites: string;
-  name: string;
-  type: string;
-  weight: string;
-  height: string;
-  abilities: string;
-}
+
+
+
 
 function App() {
   const initialURL: string = "https://pokeapi.co/api/v2/pokemon";
   const [loading, setLoading] = useState<boolean>(true);
-  const [pokemonData, setPokemonData] = useState<string[]>([]);
+  const [pokemonData, setPokemonData] = useState<Pokemon[]>([]);
   const [nextURL, setNextURL] = useState<string>("");
   const [prevURL, setPrevURL] = useState<string>("");
 
   useEffect(() => {
     const fetchPokemonData = async () => {
       // 全てのポケモンデータを取得
-      let res:any = await getAllPokemon(initialURL);
+      let res:ApiUrl = await getAllPokemon(initialURL);
       // 各ポケモンの詳細なデータを取得
       loadPokemon(res.results);
       setNextURL(res.next);
@@ -33,9 +30,9 @@ function App() {
     fetchPokemonData();
   }, []);
 
-  const loadPokemon = async (data: string[]) => {
-    let _pokemonData:any = await Promise.all(
-      data.map((pokemon:any) => {
+  const loadPokemon = async (data:ApiUrl[]) => {
+    let _pokemonData:Pokemon[] = await Promise.all(
+      data.map((pokemon) => {
         let pokemonRecord = getPokemon(pokemon.url);
         return pokemonRecord;
       })
@@ -48,8 +45,9 @@ function App() {
     if (!nextURL) return;
 
     setLoading(true);
-    let data:any = await getAllPokemon(nextURL);
-
+    let data:ApiUrl = await getAllPokemon(nextURL);
+    console.log(data);
+    console.log(typeof data.results);
     await loadPokemon(data.results);
     setNextURL(data.next);
     setPrevURL(data.previous);
@@ -59,7 +57,7 @@ function App() {
     if (!prevURL) return;
     
     setLoading(true);
-    let data: any = await getAllPokemon(prevURL);
+    let data: ApiUrl = await getAllPokemon(prevURL);
     await loadPokemon(data.results);
     setNextURL(data.next);
     setPrevURL(data.previous);

@@ -1,4 +1,7 @@
-export const getAllPokemon = (url:string) => {
+import { Pokemon } from "../interfaces/Pokemon";
+import { ApiUrl } from "../interfaces/ApiUrl";
+
+export const getAllPokemon = (url: string): Promise<ApiUrl> => {
   return new Promise((resolve, reject) => {
     fetch(url)
       .then((res) => res.json())
@@ -6,7 +9,7 @@ export const getAllPokemon = (url:string) => {
 });
 };
 
-export const getPokemon = (url:string) => {
+export const getPokemon = (url:string): Promise<Pokemon> => {
   return new Promise((resolve, reject) => {
     fetch(url)
       .then((res) => res.json())

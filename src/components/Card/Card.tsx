@@ -1,7 +1,8 @@
 import React from 'react';
+import { Pokemon } from '../../interfaces/Pokemon';
 import './Card.css';
 
-const Card = ({ pokemon }:any):JSX.Element => {
+const Card = ({ pokemon }: { pokemon: Pokemon }): JSX.Element => {
   return (
     <div className='card'>
       <div className="cardImg">
@@ -10,7 +11,7 @@ const Card = ({ pokemon }:any):JSX.Element => {
       <h3 className='cardName'>{pokemon.name}</h3>
       <div className="cardTypes">
         <div>タイプ</div>
-        {pokemon.types.map((type: any) => {
+        {pokemon.types.map((type) => {
           return (
             <div key={type.type.name}>
               <span className='typeName'>{type.type.name}</span>
