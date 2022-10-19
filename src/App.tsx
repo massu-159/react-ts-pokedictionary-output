@@ -7,9 +7,6 @@ import { Pokemon } from './interfaces/Pokemon';
 import { ApiUrl } from './interfaces/ApiUrl';
 
 
-
-
-
 function App() {
   const initialURL: string = "https://pokeapi.co/api/v2/pokemon";
   const [loading, setLoading] = useState<boolean>(true);
@@ -46,8 +43,6 @@ function App() {
 
     setLoading(true);
     let data:ApiUrl = await getAllPokemon(nextURL);
-    console.log(data);
-    console.log(typeof data.results);
     await loadPokemon(data.results);
     setNextURL(data.next);
     setPrevURL(data.previous);
